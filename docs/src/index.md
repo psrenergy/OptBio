@@ -1,4 +1,4 @@
-<img src="assets/logo-with-name.png" alt="OptBio logo"/>
+<!-- <img src="assets/logo-with-name.png" alt="OptBio logo"/> -->
 
 ## Introduction
 
