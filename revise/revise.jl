@@ -8,6 +8,6 @@ Pkg.instantiate()
 
 using OptBio
 @info("""
-This session is using OptBio.jl with Revise.jl.
+This session is using OptBio with Revise.jl.
 For more information visit https://timholy.github.io/Revise.jl/stable/.
 """)

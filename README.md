@@ -7,7 +7,7 @@
 </a>
 
 [![CI](https://github.com/psrenergy/OptBio/actions/workflows/test.yml/badge.svg)](https://github.com/psrenergy/OptBio/actions/workflows/test.yml)
-[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://psrenergy.github.io/OptBio/OptBio/dev)
+[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://psrenergy.github.io/OptBio/dev)
 
 </div>
 

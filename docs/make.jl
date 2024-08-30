@@ -14,7 +14,7 @@ makedocs(;
         disable_git = true,
         repolink = nothing,
     ),
-    sitename = "OptBio.jl",
+    sitename = "OptBio",
     warnonly = true,
     pages = [
         "Home" => "index.md",
