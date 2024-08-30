@@ -6,7 +6,7 @@
     <img src="/docs/src/assets/logo_with_name.png" width=400px alt="OptBio" />
 </a>
 
-[![CI](https://github.com/psrenergy/OptBio/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/psrenergy/OptBio/actions/workflows/ci.yml)
+[![CI](https://github.com/psrenergy/OptBio/actions/workflows/test.yml/badge.svg)](https://github.com/psrenergy/OptBio/actions/workflows/test.yml)
 [![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://psrenergy.github.io/OptBio/OptBio/dev)
 
 </div>
