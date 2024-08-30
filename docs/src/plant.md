@@ -67,3 +67,16 @@ OptBio.add_plant!(
     maximum_capacity_for_scale = 700.0,
 )
 ```
+
+## Initial Capacity
+An initial capacity can be considered for the plant using the `initial_capacity` parameter. The model will consider the already existing capacity when operating the plant. Scale economy is considered for expanding the plant. The default value of this attribute is zero.
+
+```julia
+OptBio.add_plant!(
+    database;
+    label = "Sugar Mill",
+    reference_capacity = 100.0,
+    reference_capex = 100000.0,
+    initial_capacity = 50.0,
+)
+```

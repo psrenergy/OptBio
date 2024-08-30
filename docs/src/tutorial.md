@@ -8,11 +8,23 @@ OptBio is a open-source optimization library for bioproducts chains. It is built
 
 # Installation
 
-OptBio is a package for Julia. To install it, you need to have Julia installed on your computer. To install Julia, please visit the [Julia website](https://julialang.org/downloads/#current_stable_release). After installing Julia, you can install OptBio by running the following command in the Julia REPL:
+OptBio is a package for Julia. To install it, you need to have Julia installed on your computer. To install Julia, please visit the [Julia website](https://julialang.org/downloads/#current_stable_release). After installing Julia, you can install OptBio:
 
+
+1. Clone the repository:
+```bash
+git clone https://github.com/psrenergy/OptBio.git
+```
+2. Navigate to the package directory and activate the project environment:
+```bash
+cd OptBio
+julia --project
+```
+3. Once in the Julia REPL, instantiate the environment to set up the necessary dependencies:
 ```julia
-import Pkg
-Pkg.add("OptBio")
+julia> import Pkg
+
+julia> Pkg.instantiate()
 ```
 
 # An example
@@ -241,4 +253,15 @@ Now the bioproducts chain is defined and saved in the file `my_chain.optbio`. To
 ```julia
 inputs, solution = OptBio.main([filename])
 ```
+Some results can be accessed in the `solution` dictionary. In the code below, we show the capacity of the plants, the investments made in each plant, and the amount of each product sold. 
 
+```julia
+julia> @show solution["capacity"];
+solution["capacity"] = [100.0, 0.0]
+
+julia> @show solution["investment"];
+solution["investment"] = [52000.0, 0.0]
+
+julia> @show solution["sell"];
+solution["sell"] = [75.0; 0.0; 0.0; 0.0; 0.0;;]
+```

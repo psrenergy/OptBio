@@ -94,7 +94,7 @@ min{\sum_{k \in K} A_k + \frac{1}{|S|} \sum_{s \in S} Q_s}
 
 ## Constraints
 
-### Relation between investment and capacity
+### Relation between investment and plant capacity
 
 ```math
 (C_k, B_k) \in \text{piecewise}(\{ \dot{C}_{k,p}, \dot{B}_{k,p} \}_{p = 0}^m), \ \ \ \forall k \in K
@@ -102,18 +102,18 @@ min{\sum_{k \in K} A_k + \frac{1}{|S|} \sum_{s \in S} Q_s}
 This constraint guarantees that the pair ``(C_k, B_k)`` belongs to some linear segment defined by the points ``\{ \dot{C}_{k,p}, \dot{B}_{k,p} \}_{p = 0}^m``.
 
 
-### Existing capacity
+### [Plant](plant.md) existing capacity
 ```math
 C_k \geq C^0_k, \ \ \ k \in K
 ```
 
-### Plant capacity limit
+### [Plant](plant.md) capacity limit
 ```math
 C_k \leq \overline{C}_k, \ \ \ \forall k \in K
 ```
 This constraint is only active if the user defines a maximum capacity for the plant.
 
-### Annuity calculation
+### [Plant](plant.md) annuity calculation
 ```math
 A_k = \frac{B_k \cdot r_k}{1 - (1 + r_k)^{-n_k}}, \ \ \ \forall k \in K
 ```
@@ -122,10 +122,10 @@ A_k = \frac{B_k \cdot r_k}{1 - (1 + r_k)^{-n_k}}, \ \ \ \forall k \in K
 
 ## Sets
 
-- ``I``: set of products
-- ``J``: set of processes
-- ``K``: set of plants
-- ``G``: set of sets of products with a sales limit in their sum
+- ``I``: set of [products](product.md)
+- ``J``: set of [processes](process.md)
+- ``K``: set of [plants](plant.md)
+- ``G``: set of [sets of products with a sales limit in their sum](set_of_products_constraint.md)
 - ``S``: set of scenarios
 - ``I(g)``: set of products in set ``g``. ``g \in G``. ``I(g) \subseteq I``.
 - ``I^{in}(j)``: set of products as an input of process ``j``
@@ -181,12 +181,12 @@ min{\frac{1}{|S|} \sum_{s \in S} Q_s}
 Q_s = \sum_{j \in J} c_j \cdot f^{in}_{j,u(j)} - \sum_{i \in I} p_{i, s} \cdot v_{i, s} + \sum_{i \in I} \omega_i \cdot \delta_{i,s}, \ \ \ \forall s \in S
 ```
 
-### Product availability
+### [Product](product.md) availability
 ```math
 D^f_{i, s} = D^0_{i,s} + \sum_{j \in J^p(i)} f^{out}_{j, i, s} - \sum_{j \in J^c(i)} f^{in}_{j,i,s} - v_{i,s}, \ \ \ \forall i \in I, s \in S
 ```
 
-### Process proportions
+### [Process](process.md) proportions
 ```math
 l_{j,s} = \frac{1}{\theta^{in}_{j,i}} \cdot f^{in}_{j,i,s}, \ \ \ \forall s \in S, j \in J, i \in I^{in}(j)
 ```
@@ -207,32 +207,32 @@ C_{k,s} = \hat{C}_k \ \  :\lambda_{k,s} , \ \ \ \forall s \in S, k \in K
 This constraint guarantees that the plant capacity in the operational model is equal to the plant capacity in the investment model, and it catches the marginal cost of capacity constraints, which is used in the Benders cuts.
 
 
-### Existing capacity
+### [Plant](plant.md) existing capacity
 ```math
 C_{k,s} \geq C^0_k, \ \ \ \forall s \in S, k \in K
 ```
 
-### Product sell limit
+### [Product](product.md) sell limit
 ```math
 v_{i,s} \leq \overline{v}_i, \ \ \ \forall i \in I, s \in S
 ```
 This constraint is only active if the product has a sell limit.
 
-### Product sell lower bound
+### [Product](product.md) sell lower bound
 
 ```math
 v_{i,s} \geq \underline{v}_i - \delta_{i,s}, \ \ \ \forall i \in I, s \in S
 ```
 This constraint is only active if the product has a minimum amount to be sold.
 
-### Product sell unavailability 
+### [Product](product.md) sell unavailability 
 
 ```math
 v_{i,s} = 0, \ \ \ \forall i \in I, s \in S
 ```
 This constraint is only active if the product sell price is zero.
 
-### Sales limit for the sum of products in each set
+### Sales limit for the [sum of products in each set](sum_of_products_constraint.md)
 
 ```math
 \sum_{i \in I^{\overline{v}}_g} v_{i,s} \leq \overline{v}_g, \ \ \ \forall g \in I^{\overline{v}}, s \in S
