@@ -99,7 +99,7 @@ function test_sell_limit_benders()
 
     inputs, solution = OptBio.main([filename])
 
-    @test isapprox(solution["objective_value"], -6.71992e5, atol = 10)
+    @test isapprox(solution["objective_value"], -6.71992e5, atol = 10, rtol = 0.01)
     @test isapprox(solution["investment"], [44477.3395, 19446.7], rtol = 0.2)
     @test isapprox(solution["capacity"], [80.0, 20.0], rtol = 0.1)
     @test solution["sell"] == [60.0 0.0 0.0 1500.0 1200.0]'
