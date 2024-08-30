@@ -1,0 +1,9 @@
+{
+    "julia.executablePath": "${env:JULIA_194}",
+    "Lua.diagnostics.globals": [
+        "Generic",
+        "Chart",
+        "Tab",
+        "Dashboard"
+    ],
+}

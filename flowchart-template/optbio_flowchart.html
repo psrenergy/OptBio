@@ -1,0 +1,166 @@
+<script>
+	var data = [];
+
+var processList = [...new Set(data.map(el => el.Process))];
+var productList = [...new Set(data.map(el => el.Product))];
+var elementActiveList = {};
+var config = {
+	showEdgesNames: false,
+	colorProcess: "#ebc38d",
+	propActive: "is used",
+	propRelation: "relation type",
+	valInput: "input",
+	valOutput: "output"
+};
+var baseProducts = productList.map(function(prd) { 
+	return { 
+		Product: prd, 
+		ListInput: data.filter(el=> el.Product == prd && el[config.propRelation] === config.valInput), 
+		ListOutput: data.filter(el=> el.Product == prd && el[config.propRelation] === config.valOutput)  
+	};
+});
+//
+var listDots = []
+baseProducts.forEach(function(el) { 
+
+	el.ListInput.forEach(function(elIn) { 
+		listDots.push([el.Product, elIn.Process, elIn.Process, elIn[config.propActive]]); 
+
+		let hasActive = elIn[config.propActive] == 1;
+		elementActiveList[el.Product] = elementActiveList[el.Product] || hasActive;
+		elementActiveList[elIn.Process] = elementActiveList[elIn.Process] || hasActive;
+		
+	});
+	el.ListOutput.forEach(function(elOut) {
+		listDots.push([elOut.Process, el.Product, elOut.Process, elOut[config.propActive]]); 
+
+		let hasActive = elOut[config.propActive] == 1;
+		elementActiveList[el.Product] = elementActiveList[el.Product] || hasActive;
+		elementActiveList[elOut.Process] = elementActiveList[elOut.Process] || hasActive;
+	});
+
+});
+//
+var outDot = "digraph G {\r\n";
+processList.forEach(function(el) { 
+
+	if (!elementActiveList[el]) {
+		outDot += `  "${el}" [shape=box,color=#dedede]\r\n`; 
+	} else {
+		outDot += `  "${el}" [shape=box,color=${config.colorProcess}]\r\n`; 
+	}
+	
+});
+productList.forEach(function(el) { 
+	if (!elementActiveList[el]) {
+		outDot += `  "${el}" [shape=box,color=#dedede]\r\n`; 
+	} else {
+		outDot += `  "${el}" [shape=box]\r\n`; 
+	}
+});
+if (config.showEdgesNames) {
+	listDots.forEach(function (el) {  
+		outDot += `  "${el[0]}" -> "${el[1]}" [label="${el[2]}",active="${el[3]}"];` + "\r\n"; 
+	});
+} else {
+	listDots.forEach(function (el) {  
+		outDot += `  "${el[0]}" -> "${el[1]}" [active="${el[3]}"];` + "\r\n"; 
+	});
+}
+outDot += "}\r\n";
+//
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en" style="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptBio Process->Product Viewer</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #visualization {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+    <div id="visualization"></div>
+
+    <script>
+        function makeDiagramDOT(dotString) {
+            var parsedData = window.parsedData = vis.parseDOTNetwork(dotString);
+			parsedData.nodes.forEach(function (node) {
+				var originalColor = node.color ? node.color.background : null;
+				if (originalColor) {
+					node.color.highlight = {
+						border: originalColor,
+						background: originalColor
+					};
+				}
+			});
+			parsedData.edges.forEach(function (edge) {
+				if (edge["active"] != 1) {
+					edge.color = { 
+						color: '#dedede',
+						highlight: '#dedede'
+					};
+				}
+			});
+
+            var container = document.getElementById('visualization');
+            var options = {
+				nodes: {
+					widthConstraint:  { minimum: 190, maximum: 190 },
+					heightConstraint: { minimum:  40 },
+				},
+				edges: {
+					font: { size: 12 }
+				},
+				layout: {
+				  hierarchical: {
+					levelSeparation: 300,
+					//nodeSpacing: 500,
+					//treeSpacing: 200,
+					
+					blockShifting: false,
+					edgeMinimization: true,
+					parentCentralization: true,
+					
+					direction: "LR",
+					sortMethod: "directed",
+					shakeTowards: "roots",
+				  },
+				},
+				interaction: { dragNodes: true },
+				physics: {
+				  enabled: true,
+				},
+			};
+			//options.layout.hierarchical.enabled = false;
+			//options.physics.enabled = false;
+            var network = window.network = new vis.Network(container, parsedData, options);
+
+			network.on("click", function (params) {
+				var nodeID = params['nodes']['0'];
+				if (nodeID) {
+					let vetSelected = network.getConnectedNodes(nodeID);
+					vetSelected.push(nodeID);
+					network.selectNodes(vetSelected);
+				}
+			});
+			//
+			
+        }
+        makeDiagramDOT(outDot);
+    </script>
+</body>
+</html>
