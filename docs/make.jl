@@ -1,11 +1,6 @@
-import Pkg
-Pkg.activate(dirname(@__DIR__))
-Pkg.instantiate()
-using OptBio
-
-Pkg.activate(@__DIR__)
-Pkg.instantiate()
 using Documenter
+
+using OptBio
 
 makedocs(;
     modules = [OptBio],
@@ -34,4 +29,9 @@ makedocs(;
         "API Reference" => "api.md",
         "Mathematical Model" => "optimization.md",
     ],
+)
+
+deploydocs(;
+    repo = "github.com/psrenergy/OptBio.git",
+    push_preview = true,
 )
