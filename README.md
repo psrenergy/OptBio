@@ -3,7 +3,7 @@
 <div align="center">
 
 <a href="/docs/src/assets/">
-    <img src="/docs/src/assets/logo_with_name.png" width=200px alt="OptBio" />
+    <img src="/docs/src/assets/logo_with_name.png" width=400px alt="OptBio" />
 </a>
 
 [![CI](https://github.com/psrenergy/OptBio/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/psrenergy/OptBio/actions/workflows/ci.yml)
