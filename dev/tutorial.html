@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tutorial · OptBio.jl</title><meta name="title" content="Tutorial · OptBio.jl"/><meta property="og:title" content="Tutorial · OptBio.jl"/><meta property="twitter:title" content="Tutorial · OptBio.jl"/><meta name="description" content="Documentation for OptBio.jl."/><meta property="og:description" content="Documentation for OptBio.jl."/><meta property="twitter:description" content="Documentation for OptBio.jl."/><script data-outdated-warner src="assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="search_index.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="index.html"><img src="assets/logo.png" alt="OptBio.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href="index.html">OptBio.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="index.html">Home</a></li><li class="is-active"><a class="tocitem" href="tutorial.html">Tutorial</a><ul class="internal"><li class="toplevel"><a class="tocitem" href="#What-is-OptBio?"><span>What is OptBio?</span></a></li><li class="toplevel"><a class="tocitem" href="#Installation"><span>Installation</span></a></li><li class="toplevel"><a class="tocitem" href="#An-example"><span>An example</span></a></li><li class="toplevel"><a class="tocitem" href="#Step-by-step"><span>Step-by-step</span></a></li></ul></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="configuration.html">Configuration</a></li><li><a class="tocitem" href="product.html">Product</a></li><li><a class="tocitem" href="process.html">Process</a></li><li><a class="tocitem" href="plant.html">Plant</a></li><li><a class="tocitem" href="sum_of_products_constraint.html">Sum of products constraint</a></li></ul></li><li><a class="tocitem" href="api.html">API Reference</a></li><li><a class="tocitem" href="optimization.html">Mathematical Model</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href="tutorial.html">Tutorial</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href="tutorial.html">Tutorial</a></li></ul></nav><div class="docs-right"><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Getting-started-with-OptBio"><a class="docs-heading-anchor" href="#Getting-started-with-OptBio">Getting started with OptBio</a><a id="Getting-started-with-OptBio-1"></a><a class="docs-heading-anchor-permalink" href="#Getting-started-with-OptBio" title="Permalink"></a></h1><p>This tutorial is aimed at providing a quick introduction to defining bioproducts chains and optimizing its investments and operations using OptBio.</p><h1 id="What-is-OptBio?"><a class="docs-heading-anchor" href="#What-is-OptBio?">What is OptBio?</a><a id="What-is-OptBio?-1"></a><a class="docs-heading-anchor-permalink" href="#What-is-OptBio?" title="Permalink"></a></h1><p>OptBio is a open-source optimization library for bioproducts chains. It is built on top of <a href="https://jump.dev/JuMP.jl/stable/">JuMP</a>. It allows users to define a bioproducts chain, including products, processes and plants, and optimize the investments and operations of the chain.</p><h1 id="Installation"><a class="docs-heading-anchor" href="#Installation">Installation</a><a id="Installation-1"></a><a class="docs-heading-anchor-permalink" href="#Installation" title="Permalink"></a></h1><p>OptBio is a package for Julia. To install it, you need to have Julia installed on your computer. To install Julia, please visit the <a href="https://julialang.org/downloads/#current_stable_release">Julia website</a>. After installing Julia, you can install OptBio by running the following command in the Julia REPL:</p><pre><code class="language-julia hljs">import Pkg
+Pkg.add(&quot;OptBio&quot;)</code></pre><h1 id="An-example"><a class="docs-heading-anchor" href="#An-example">An example</a><a id="An-example-1"></a><a class="docs-heading-anchor-permalink" href="#An-example" title="Permalink"></a></h1><p>In this example, we will define a simple bioproducts chain based on sugarcane and its straw. The chain will include a sugar mill and an ethanol plant. The sugar mill will produce sugar from sugarcane, and the ethanol plant will produce first and second generation ethanol from sugarcane and straw. Attributes of each of these elements will be defined, and also the relationships between them.</p><pre><code class="language-julia hljs">using OptBio
+
+filename = &quot;my_optbio_case_folder/my_chain.optbio&quot;
+database = OptBio.create_case(filename)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Sugar&quot;,
+    sell_price = 5000.0,
+    unit = &quot;t&quot;,
+)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Sugarcane&quot;,
+    unit = &quot;t&quot;,
+    initial_availability = 100.0,
+)
+
+OptBio.add_plant!(
+    database;
+    label = &quot;Sugar Mill&quot;,
+    reference_capacity = 100.0,
+    reference_capex = 52000.0,
+)
+
+OptBio.add_process!(
+    database;
+    label = &quot;Sugar Mill&quot;,
+    opex = 0.0,
+    product_input = [&quot;Sugarcane&quot;],
+    factor_input = [1.0],
+    product_output = [&quot;Sugar&quot;],
+    factor_output = [0.75],
+)
+
+OptBio.set_process_plant!(database, &quot;Sugar Mill&quot;, &quot;Sugar Mill&quot;)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Straw&quot;,
+    unit = &quot;t&quot;,
+    initial_availability = 100.0,
+)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Ethanol 1G&quot;,
+    unit = &quot;kL&quot;,
+    sell_price = 0.5,
+)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Ethanol 2G&quot;,
+    unit = &quot;kL&quot;,
+    sell_price = 0.7,
+)
+
+OptBio.add_plant!(
+    database;
+    label = &quot;Ethanol Plant&quot;,
+    reference_capacity = 100.0,
+    reference_capex = 100000.0,
+)
+
+OptBio.add_process!(
+    database;
+    label = &quot;Integrated ethanol production&quot;,
+    opex = 0.0,
+    product_input = [&quot;Sugarcane&quot;, &quot;Straw&quot;],
+    factor_input = [1.0, 0.9],
+    product_output = [&quot;Ethanol 1G&quot;, &quot;Ethanol 2G&quot;],
+    factor_output = [7.5, 6.0],
+)
+
+OptBio.set_process_plant!(database, &quot;Integrated ethanol production&quot;, &quot;Ethanol Plant&quot;)
+
+OptBio.close_database!(database)</code></pre><p>After running this code, a file named <code>my_chain.optbio</code> will be created in the folder <code>my_optbio_case_folder</code>. This file will be used by OptBio to extract the information about the bioproducts chain, build the optimization problem and solve it.</p><pre><code class="language-julia hljs">julia&gt; inputs, solution = OptBio.main([filename]);
+
+julia&gt; @show solution[&quot;capacity&quot;];
+solution[&quot;capacity&quot;] = [100.0, 0.0]
+
+julia&gt; @show solution[&quot;investment&quot;];
+solution[&quot;investment&quot;] = [52000.0, 0.0]
+
+julia&gt; @show solution[&quot;sell&quot;];
+solution[&quot;sell&quot;] = [75.0; 0.0; 0.0; 0.0; 0.0;;]</code></pre><p>After running the OptBio optimization, a summary of the main results will be available in the <code>solution</code> dictionary. A more detailed report will be available in the folder <code>my_optbio_case_folder/results</code>, including many <code>.csv</code> files with the results of the optimization, the file <code>optbio_dashboard.html</code> with a dashboard of the results, and the file <code>optbio_flowchart.html</code> with a flowchart of the bioproducts chain, with the paths of chosen investments highlighted, as shown in the image below.</p><p><img src="image-1.png" alt="alt text"/></p><h1 id="Step-by-step"><a class="docs-heading-anchor" href="#Step-by-step">Step-by-step</a><a id="Step-by-step-1"></a><a class="docs-heading-anchor-permalink" href="#Step-by-step" title="Permalink"></a></h1><p>Once the OptBio package is installed, to use it in your programs write:</p><pre><code class="language-julia hljs">using OptBio</code></pre><p>To initialize a new OptBio case, use the <code>create_case</code> function, passing the name of the file where the case will be saved. This function will return a database object that will be used to define the bioproducts chain.</p><pre><code class="language-julia hljs">filename = &quot;my_optbio_case_folder/my_chain.optbio&quot;
+database = OptBio.create_case(filename)</code></pre><p>Products are defined using the <code>add_product!</code> function. The function receives the database object and some attributes of the product. <code>label</code>and <code>unit</code> are mandatory attributes. The <code>sell_price</code> attribute is optional and represents the price at which the product is sold. In the code below, we add to the database the product &quot;Sugar&quot;, which is sold at a price of <span>$</span>5000.0 per ton.</p><pre><code class="language-julia hljs">OptBio.add_product!(
+    database;
+    label = &quot;Sugar&quot;,
+    sell_price = 5000.0,
+    unit = &quot;t&quot;,
+)</code></pre><p>Another attribute that can be defined for a product is the <code>initial_availability</code>, which represents the initial availability of the product in the chain. It is necessary that the root product of the chain has its initial availability defined. In the code below, we add to the database the product &quot;Sugarcane&quot;, which has an initial availability of 100.0 tons. Also, it has no <code>sell_price</code> attribute, which means that it is not sold.</p><pre><code class="language-julia hljs">OptBio.add_product!(
+    database;
+    label = &quot;Sugarcane&quot;,
+    unit = &quot;t&quot;,
+    initial_availability = 100.0,
+)</code></pre><p>Plants are defined using the <code>add_plant!</code> function. The function receives the database object and some attributes of the plant. <code>label</code>, <code>reference_capacity</code> and <code>reference_capex</code> are mandatory attributes. In the code below, we add to the database the plant &quot;Sugar Mill&quot;, which has a reference capacity of 100.0 tons (unit is based on the first product that will linked to it) and a reference capital expenditure of <span>$</span>52000.0.</p><pre><code class="language-julia hljs">OptBio.add_plant!(
+    database;
+    label = &quot;Sugar Mill&quot;,
+    reference_capacity = 100.0,
+    reference_capex = 52000.0,
+)</code></pre><p>Processes are defined using the <code>add_process!</code> function. As usual, <code>label</code> is a mandatory attribute. Also, the <code>opex</code> attribute must be defined, representing the operational expenditure of the process. The process must have a vector of input products, defined by the <code>product_input</code> attribute, and a vector of output products, defined by the <code>product_output</code> attribute. The <code>factor_input</code> and <code>factor_output</code> attributes represent the proportion of each input and output product in the process. In the code below, we add to the database the process &quot;Sugar Mill&quot;, which has no operational expenditure, and produces 0.75 tons of sugar for each ton of sugarcane processed.</p><pre><code class="language-julia hljs">OptBio.add_process!(
+    database;
+    label = &quot;Sugar Mill&quot;,
+    opex = 0.0,
+    product_input = [&quot;Sugarcane&quot;],
+    factor_input = [1.0],
+    product_output = [&quot;Sugar&quot;],
+    factor_output = [0.75],
+)</code></pre><p>The <code>set_process_plant!</code> function is used to link a process to a plant. The function receives the database object, the label of the process and the label of the plant. In the code below, we link the process &quot;Sugar Mill&quot; to the plant &quot;Sugar Mill&quot;. </p><pre><code class="language-julia hljs">OptBio.set_process_plant!(database, &quot;Sugar Mill&quot;, &quot;Sugar Mill&quot;)</code></pre><p>Now, let&#39;s define the remaining elements of the bioproducts chain. We will add the products &quot;Straw&quot;, &quot;Ethanol 1G&quot;, and &quot;Ethanol 2G&quot; to the database. We will also add the plant &quot;Ethanol Plant&quot; and the process &quot;Integrated ethanol production&quot; that converts sugarcane and straw into first and second generation ethanol. Finally, we will link the process to the plant. Here is the code:</p><pre><code class="language-julia hljs">OptBio.add_product!(
+    database;
+    label = &quot;Straw&quot;,
+    unit = &quot;t&quot;,
+    initial_availability = 100.0,
+)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Ethanol 1G&quot;,
+    unit = &quot;kL&quot;,
+    sell_price = 0.5,
+)
+
+OptBio.add_product!(
+    database;
+    label = &quot;Ethanol 2G&quot;,
+    unit = &quot;kL&quot;,
+    sell_price = 0.7,
+)
+
+OptBio.add_plant!(
+    database;
+    label = &quot;Ethanol Plant&quot;,
+    reference_capacity = 100.0,
+    reference_capex = 100000.0,
+)
+
+OptBio.add_process!(
+    database;
+    label = &quot;Integrated ethanol production&quot;,
+    opex = 0.0,
+    product_input = [&quot;Sugarcane&quot;, &quot;Straw&quot;],
+    factor_input = [1.0, 0.9],
+    product_output = [&quot;Ethanol 1G&quot;, &quot;Ethanol 2G&quot;],
+    factor_output = [7.5, 6.0],
+)
+
+OptBio.set_process_plant!(database, &quot;Integrated ethanol production&quot;, &quot;Ethanol Plant&quot;)</code></pre><p>After defining the bioproducts chain, close the database using the <code>close_database!</code> function. This function receives the database object as an argument. In the code below, we close the database.</p><pre><code class="language-julia hljs">OptBio.close_database!(database)</code></pre><p>Now the bioproducts chain is defined and saved in the file <code>my_chain.optbio</code>. To optimize the investments and operations of the chain, use the <code>main</code> function. This function receives a vector with the arguments of the execution, including the path of the <code>.optbio</code> file. The function returns a tuple with two elements: the first element is a dictionary with the inputs of the optimization, and the second element is a dictionary with the results of the optimization. In the code below, we optimize the chain defined in the file <code>my_chain.optbio</code>.</p><pre><code class="language-julia hljs">inputs, solution = OptBio.main([filename])</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="index.html">« Home</a><a class="docs-footer-nextpage" href="configuration.html">Configuration »</a><div class="flexbox-break"></div></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.4.1 on <span class="colophon-date" title="Friday 30 August 2024 19:32">Friday 30 August 2024</span>. Using Julia version 1.10.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
