@@ -1,4 +1,4 @@
-<img src="assets/logo_with_name.png" alt="OptBio logo"/>
+<img src="assets/logo-with-name.png" alt="OptBio logo"/>
 
 ## Introduction
 
@@ -11,20 +11,20 @@ Developed by [PSR](https://www.psr-inc.com/en/), a global provider of consulting
 To install the package, you can follow these steps:
 
 1. Clone the repository:
-```bash
-git clone https://github.com/psrenergy/OptBio.git
-```
+    ```bash
+    git clone https://github.com/psrenergy/OptBio.git
+    ```
 2. Navigate to the package directory and activate the project environment:
-```bash
-cd OptBio
-julia --project
-```
+    ```bash
+    cd OptBio
+    julia --project
+    ```
 3. Once in the Julia REPL, instantiate the environment to set up the necessary dependencies:
-```julia
-julia> import Pkg
+    ```julia
+    julia> import Pkg
 
-julia> Pkg.instantiate()
-```
+    julia> Pkg.instantiate()
+    ```
 This will configure everything you need to start using the package.
 
 ## Contributing
