@@ -1,5 +1,3 @@
-<!-- <img src="assets/logo-with-name.png" alt="OptBio logo"/> -->
-
 ## Introduction
 
 OptBio is a Julia package designed for modeling and optimizing the value of bioproducts. It employs stochastic optimization to account for uncertainties in product selling prices and variations in crop yields. The package determines the optimal investment, production capacity, and operation of industrial plants to maximize profit. Built on the JuMP modeling language, OptBio uses the HiGHS solver to address these optimization problems.
