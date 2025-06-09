@@ -53,21 +53,21 @@ function exponential_section_points_normalized(ratio::Float64, n_sections::Int)
     return sections_points
 end
 
-function capacity_section_points(
+function investment_section_points(
     maximum_capacity::Float64,
     maximum_capacity_for_scale::Float64,
+    reference_capex::Float64,
+    reference_capacity::Float64,
+    scaling_factor::Float64,
     n_sections::Int,
-    ratio::Float64,
 )
     if isnan(maximum_capacity_for_scale)
         maximum_capacity_for_scale = Inf
     end
-    if maximum_capacity_for_scale > maximum_capacity
-        sections_points = exponential_section_points_normalized(ratio, n_sections) * maximum_capacity
-    else
-        sections_points = exponential_section_points_normalized(ratio, n_sections) * maximum_capacity_for_scale
-    end
-    return sections_points
+    maximum_capacity_for_linearization = min(maximum_capacity, maximum_capacity_for_scale)
+    maximum_investment = reference_capex * (maximum_capacity_for_linearization / reference_capacity)^scaling_factor
+    image_points = [i/n_sections * maximum_investment for i in 0:n_sections]
+    return image_points
 end
 
 function solve_model(inputs::OptBioInputs)

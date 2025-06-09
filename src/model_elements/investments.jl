@@ -26,26 +26,31 @@ function investments!(
             investment_function(capacity_entry) =
                 reference_capex[k] * (capacity_entry / reference_capacity[k])^scaling_factor[k]
 
-            capacity_domain = capacity_section_points(
+            inverse_investment_function(investment_entry) =
+                (investment_entry / reference_capex[k])^(1 / scaling_factor[k]) * reference_capacity[k]
+
+            investment_image = investment_section_points(
                 maximum_possible_capacity(inputs.plant, k),
                 maximum_capacity_for_scale[k],
+                reference_capex[k],
+                reference_capacity[k],
+                scaling_factor[k],
                 100,
-                1.05,
             )
 
-            investment_over_capacity = [investment_function(x) for x in capacity_domain]
+            capacity_domain = inverse_investment_function.(investment_image)
             if !isnan(maximum_capacity_for_scale[k]) &&
                maximum_capacity_for_scale[k] < maximum_possible_capacity(inputs.plant, k)
                 push!(capacity_domain, maximum_possible_capacity(inputs.plant, k))
                 push!(
-                    investment_over_capacity,
+                    investment_image,
                     investment_function(capacity_domain[end-1]) * capacity_domain[end] / capacity_domain[end-1],
                 )
             end
 
             @constraint(
                 model,
-                investment[k] == piecewiselinear(model, capacity[k], capacity_domain, investment_over_capacity),
+                investment[k] == piecewiselinear(model, capacity[k], capacity_domain, investment_image),
             )
         end
     end
