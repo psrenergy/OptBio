@@ -5,7 +5,7 @@
 <a href="/docs/src/assets/">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="/docs/src/assets/logo-with-name-dark.png">
-        <source media="(prefers-color-scheme: light)" srcset="/docs/src/assets/logo-with-name.png">
+        <source media="(prefers-color-scheme: light)" srcset="/docs/src/assets/logo-with-name-light.png">
         <img src="/docs/src/assets/logo-with-name.png" width="400px" alt="OptBio" />
     </picture>
 </a>
