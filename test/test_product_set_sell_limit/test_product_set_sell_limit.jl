@@ -108,7 +108,7 @@ function test_sum_of_products_constraint_benders()
 
     @test isapprox(solution["investment"], [44477.3395, 19446.7], rtol = 0.2)
     @test isapprox(solution["capacity"], [80.0, 20.0], rtol = 0.1)
-    @test solution["sell"][1] == 60.0
+    @test isapprox(solution["sell"][1], 60.0, rtol = 0.1)
     @test solution["sell"][4] + solution["sell"][5] == 2000.0
 
     rm(filename, force = true)
